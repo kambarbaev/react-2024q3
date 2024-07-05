@@ -11,9 +11,10 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react-refresh', 'react', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react-refresh', 'react', '@typescript-eslint', 'react-hooks', 'react-compiler'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     '@typescript-eslint/no-explicit-any': 'error',
+    'react-compiler/react-compiler': 'error',
   },
 };
