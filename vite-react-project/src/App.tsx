@@ -6,6 +6,16 @@ import './App.css';
 function App() {
   const [count, setCount] = useState(0);
 
+  const test = 'test';
+
+  let a: any = 1;
+
+  const exampleFunction = (param: any) => {
+    console.log(param);
+  };
+
+  console.log(exampleFunction(test), a);
+
   return (
     <>
       <div>
