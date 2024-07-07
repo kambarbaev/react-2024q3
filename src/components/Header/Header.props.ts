@@ -6,4 +6,5 @@ export type SearchFormState = {
 
 export type HeaderProps = {
   updateSearchData: (data: People[]) => void;
+  handleSearch: (searchString: string) => void;
 };

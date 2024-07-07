@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import styles from './Header.module.css';
 import { HeaderProps, SearchFormState } from './Header.props';
-import { fetchApi } from '../../serviсes/api';
 import { SearchButton, SearchInput } from '..';
 
 class Header extends Component<HeaderProps, SearchFormState> {
@@ -15,29 +14,22 @@ class Header extends Component<HeaderProps, SearchFormState> {
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { searchString: searchString } = this.state;
+    const { searchString } = this.state;
 
     if (searchString.trim() !== '') {
       localStorage.setItem('searchString', searchString.trim());
     }
 
-    fetchApi(searchString.trim()).then((data) => {
-      this.props.updateSearchData(data.results);
-    });
+    this.props.handleSearch(searchString.trim());
   };
 
   componentDidMount() {
     const savedSearchString = localStorage.getItem('searchString');
-
     if (savedSearchString) {
       this.setState({ searchString: savedSearchString });
-      fetchApi(savedSearchString).then((data) => {
-        this.props.updateSearchData(data.results);
-      });
+      this.props.handleSearch(savedSearchString.trim());
     } else {
-      fetchApi('').then((data) => {
-        this.props.updateSearchData(data.results);
-      });
+      this.props.handleSearch('');
     }
   }
 
