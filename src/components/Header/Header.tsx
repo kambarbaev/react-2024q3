@@ -40,7 +40,7 @@ class Header extends Component<HeaderProps, SearchFormState> {
 
   render() {
     if (this.state.error) {
-      throw new Error('Произошла ошибка');
+      throw new Error('Ops! Something went wrong!');
     }
     return (
       <header className={styles['header']}>
