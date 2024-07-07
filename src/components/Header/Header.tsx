@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import styles from './Header.module.css';
 import { HeaderProps, SearchFormState } from './Header.props';
-import { SearchButton, SearchInput } from '..';
+import { Button, SearchInput } from '..';
 
 class Header extends Component<HeaderProps, SearchFormState> {
   state: SearchFormState = {
@@ -49,11 +49,9 @@ class Header extends Component<HeaderProps, SearchFormState> {
         </div>
         <form className={styles['form']} onSubmit={this.handleSubmit}>
           <SearchInput value={this.state.searchString} onChange={this.handleInputChange} />
-          <SearchButton />
+          <Button className={styles['search-button']} text="Search" />
         </form>
-        <div>
-          <button onClick={this.throwError}>Throw error</button>
-        </div>
+        <Button className={styles['error-button']} onClick={this.throwError} text="Throw error" />
       </header>
     );
   }
