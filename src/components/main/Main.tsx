@@ -1,25 +1,22 @@
 import { Component } from 'react';
-import style from './Main.module.css';
+import styles from './Main.module.css';
 import { MainProps } from './Main.props';
+import Card from '../card/Card';
 
 class Main extends Component<MainProps> {
   render() {
     const { searchData, loading } = this.props;
 
     return (
-      <main className={style['main']}>
+      <main className={styles['main']}>
         {loading ? (
-          <p>Loading...</p>
+          <div className={styles['loading']}>Loading...</div>
         ) : (
-          <ul>
+          <ul className={styles['list']}>
             {searchData.length > 0 ? (
-              searchData.map((person, index) => (
-                <li key={index} className={style['card']}>
-                  {person.name}
-                </li>
-              ))
+              searchData.map((person) => <Card key={person.name} person={person} />)
             ) : (
-              <li className={style['card']}>{'No data available'}</li>
+              <div className={styles['no-data']}>No aviable data</div>
             )}
           </ul>
         )}

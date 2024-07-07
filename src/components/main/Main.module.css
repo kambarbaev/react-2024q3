@@ -2,8 +2,39 @@
 }
 
 .list {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 20px;
+
+  @media (max-width: 910px) {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
+
+  @media (max-width: 699px) {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+.loading,
+.no-data {
+  align-self: сenter;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  color: #f8b600;
+  height: 80vh;
+}
+
+.no-data {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
