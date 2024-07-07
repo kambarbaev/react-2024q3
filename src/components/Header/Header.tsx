@@ -6,6 +6,7 @@ import { SearchButton, SearchInput } from '..';
 class Header extends Component<HeaderProps, SearchFormState> {
   state: SearchFormState = {
     searchString: '',
+    error: false,
   };
 
   handleInputChange = (value: string) => {
@@ -33,13 +34,23 @@ class Header extends Component<HeaderProps, SearchFormState> {
     }
   }
 
+  throwError = () => {
+    this.setState({ error: true });
+  };
+
   render() {
+    if (this.state.error) {
+      throw new Error('Произошла ошибка');
+    }
     return (
       <header className={styles['header']}>
         <form className={styles['form']} onSubmit={this.handleSubmit}>
           <SearchInput value={this.state.searchString} onChange={this.handleInputChange} />
           <SearchButton />
         </form>
+        <div>
+          <button onClick={this.throwError}>Throw error</button>
+        </div>
       </header>
     );
   }
