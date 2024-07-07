@@ -22,7 +22,7 @@ class Header extends Component<HeaderProps, SearchFormState> {
     }
 
     fetchApi(searchString.trim()).then((data) => {
-      this.props.updateSearchData(data);
+      this.props.updateSearchData(data.results);
     });
   };
 
@@ -32,11 +32,11 @@ class Header extends Component<HeaderProps, SearchFormState> {
     if (savedSearchString) {
       this.setState({ searchString: savedSearchString });
       fetchApi(savedSearchString).then((data) => {
-        this.props.updateSearchData(data);
+        this.props.updateSearchData(data.results);
       });
     } else {
       fetchApi('').then((data) => {
-        this.props.updateSearchData(data);
+        this.props.updateSearchData(data.results);
       });
     }
   }

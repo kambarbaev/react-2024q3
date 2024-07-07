@@ -1,23 +1,14 @@
-import { People } from './api.props';
+import { ApiResponse } from './api.props';
 
 const API_BASE_URL = 'https://swapi.dev/api';
 
-export async function fetchApi(searchString?: string): Promise<People[]> {
-  let url = `${API_BASE_URL}/people/`;
-
-  if (searchString && searchString.trim() !== '') {
-    const encodedSearchTerm = encodeURIComponent(searchString.trim());
-    url += `?search=${encodedSearchTerm}`;
+export const fetchApi = async (searchString: string): Promise<ApiResponse> => {
+  const endpoint = searchString
+    ? `${API_BASE_URL}/people/?search=${encodeURIComponent(searchString)}`
+    : `${API_BASE_URL}/people/`;
+  const response = await fetch(endpoint);
+  if (!response.ok) {
+    throw new Error('API not available');
   }
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Response was not ok');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Fetch error:', error);
-    throw error;
-  }
-}
+  return response.json();
+};

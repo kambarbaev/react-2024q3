@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import styles from './App.module.css';
-import { Header } from './components';
+import { Header, Main } from './components';
 import { People } from './serviсes/api.props';
 
 class App extends Component {
   state = {
-    searchData: null,
+    searchData: [] as People[],
   };
 
   updateSearchData = (data: People[]) => {
@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div className={styles['app']}>
         <Header updateSearchData={this.updateSearchData} />
-        {searchData && <div>`${searchData}`</div>}
+        <Main searchData={searchData} />
       </div>
     );
   }
