@@ -1,9 +1,6 @@
 import { Component } from 'react';
 import styles from './ErrorBoundary.module.css';
-
-interface ErrorBoundaryState {
-  hasError: boolean;
-}
+import { ErrorBoundaryState } from './ErrorBoundary.props';
 
 class ErrorBoundary extends Component<{ children: React.ReactNode }, ErrorBoundaryState> {
   constructor(props: { children: React.ReactNode }) {
