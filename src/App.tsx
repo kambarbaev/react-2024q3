@@ -1,12 +1,25 @@
-import React from 'react';
+import { Component } from 'react';
 import styles from './App.module.css';
 import { Header } from './components';
+import { People } from './serviсes/api.props';
 
-class App extends React.Component {
+class App extends Component {
+  state = {
+    searchData: null,
+  };
+
+  updateSearchData = (data: People[]) => {
+    this.setState({ searchData: data });
+  };
+
   render() {
+    const { searchData } = this.state;
+    console.log(searchData);
+
     return (
       <div className={styles['app']}>
-        <Header />
+        <Header updateSearchData={this.updateSearchData} />
+        {searchData && <div>`${searchData}`</div>}
       </div>
     );
   }
