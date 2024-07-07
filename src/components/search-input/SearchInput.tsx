@@ -8,7 +8,15 @@ class SearchInput extends Component<SearchInputProps> {
   };
 
   render() {
-    return <input className={styles['input']} type="text" value={this.props.value} onChange={this.handleChange} />;
+    return (
+      <input
+        className={styles['input']}
+        type="text"
+        value={this.props.value}
+        onChange={this.handleChange}
+        placeholder="Start typing to search..."
+      />
+    );
   }
 }
 
