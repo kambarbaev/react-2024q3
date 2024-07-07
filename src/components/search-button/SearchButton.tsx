@@ -3,7 +3,7 @@ import styles from './SearchButton.module.css';
 
 class SearchButton extends Component {
   render() {
-    return <button className={styles['input']}>Search</button>;
+    return <button className={styles['button']}>Search</button>;
   }
 }
 

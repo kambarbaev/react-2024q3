@@ -44,6 +44,9 @@ class Header extends Component<HeaderProps, SearchFormState> {
 
     return (
       <header className={styles['header']}>
+        <div className={styles['logotype']}>
+          <img src="/logotype-yellow.png" />
+        </div>
         <form className={styles['form']} onSubmit={this.handleSubmit}>
           <SearchInput value={this.state.searchString} onChange={this.handleInputChange} />
           <SearchButton />
