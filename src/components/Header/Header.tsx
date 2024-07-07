@@ -17,15 +17,14 @@ class Header extends Component<HeaderProps, SearchFormState> {
     e.preventDefault();
     const { searchString } = this.state;
 
-    if (searchString.trim() !== '') {
-      localStorage.setItem('searchString', searchString.trim());
-    }
+    localStorage.setItem('searchString', searchString.trim());
 
     this.props.handleSearch(searchString.trim());
   };
 
   componentDidMount() {
     const savedSearchString = localStorage.getItem('searchString');
+
     if (savedSearchString) {
       this.setState({ searchString: savedSearchString });
       this.props.handleSearch(savedSearchString.trim());
@@ -42,6 +41,7 @@ class Header extends Component<HeaderProps, SearchFormState> {
     if (this.state.error) {
       throw new Error('Ops! Something went wrong!');
     }
+
     return (
       <header className={styles['header']}>
         <form className={styles['form']} onSubmit={this.handleSubmit}>
