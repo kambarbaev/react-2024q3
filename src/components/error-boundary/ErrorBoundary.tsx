@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import styles from './ErrorBoundary.module.css';
 import { ErrorBoundaryState } from './ErrorBoundary.props';
+import Button from '../button/Button';
 
 class ErrorBoundary extends Component<{ children: React.ReactNode }, ErrorBoundaryState> {
   constructor(props: { children: React.ReactNode }) {
@@ -13,13 +14,17 @@ class ErrorBoundary extends Component<{ children: React.ReactNode }, ErrorBounda
     return this.setState({ hasError: true });
   }
 
+  pageReload = () => {
+    window.location.reload();
+  };
+
   render() {
     if (this.state.hasError) {
       return (
         <section className={styles['error']}>
-          <h2>Something went wrong</h2>
-          <h3>Please reload the page!</h3>
-          <button onClick={() => window.location.reload()}>Reload</button>
+          <h2 className={styles['title']}>Something went wrong</h2>
+          <h3 className={styles['subtitle']}>Please reload the page!</h3>
+          <Button className={styles['reload']} onClick={this.pageReload} text="Reload page" />
         </section>
       );
     }
