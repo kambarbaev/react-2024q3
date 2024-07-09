@@ -14,11 +14,10 @@ class Header extends Component<HeaderProps, SearchFormState> {
   };
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     const { searchString } = this.state;
 
+    e.preventDefault();
     localStorage.setItem('searchString', searchString.trim());
-
     this.props.handleSearch(searchString.trim());
   };
 
