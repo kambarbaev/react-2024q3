@@ -1,37 +1,37 @@
-import { Component } from 'react';
 import styles from './App.module.css';
 import { Header, Main } from '../components';
 import { People } from '../serviсes/api.props';
 import { fetchApi } from '../serviсes/api';
-import { AppState } from './App.props';
+import { useEffect, useState } from 'react';
 
-class App extends Component {
-  state: AppState = {
-    searchData: [],
-    loading: false,
-  };
+function App() {
+  const [searchData, setSearchData] = useState<People[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  handleSearch = (searchString: string) => {
-    this.setState({ loading: true });
+  useEffect(() => {
+    const savedSearchString = localStorage.getItem('searchString');
+
+    if (savedSearchString) {
+      handleSearch(savedSearchString);
+    } else {
+      handleSearch('');
+    }
+  }, []);
+
+  const handleSearch = (searchString: string) => {
+    setLoading(true);
     fetchApi(searchString).then((data) => {
-      this.setState({ searchData: data.results, loading: false });
+      setSearchData(data.results);
+      setLoading(false);
     });
   };
 
-  updateSearchData = (data: People[]) => {
-    this.setState({ searchData: data });
-  };
-
-  render() {
-    const { searchData, loading } = this.state;
-
-    return (
-      <div className={styles['app']}>
-        <Header updateSearchData={this.updateSearchData} handleSearch={this.handleSearch} />
-        <Main searchData={searchData} loading={loading} />
-      </div>
-    );
-  }
+  return (
+    <div className={styles['app']}>
+      <Header handleSearch={handleSearch} />
+      <Main searchData={searchData} loading={loading} />
+    </div>
+  );
 }
 
 export default App;
