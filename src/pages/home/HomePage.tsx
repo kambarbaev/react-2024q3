@@ -4,6 +4,7 @@ import { fetchApi } from '../../serviсes/api';
 import { People } from '../../serviсes/api.props';
 import styles from './HomePage.module.css';
 import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
+import { Outlet } from 'react-router-dom';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
@@ -28,7 +29,7 @@ function HomePage() {
         <Header handleSearch={handleSearch} />
         <Main searchData={searchData} loading={loading} />
       </aside>
-      <main className={styles['main']}>asd</main>
+      <Outlet />
     </>
   );
 }

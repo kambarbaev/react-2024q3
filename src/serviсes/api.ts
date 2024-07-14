@@ -12,3 +12,11 @@ export const fetchApi = async (searchString: string): Promise<ApiResponse> => {
   }
   return response.json();
 };
+
+export const fetchPerson = async (personUrl: string) => {
+  const response = await fetch(`${API_BASE_URL}/people/${encodeURIComponent(personUrl)}`);
+  if (!response.ok) {
+    throw new Error('API not available');
+  }
+  return response.json();
+};
