@@ -3,17 +3,18 @@ import { Header, Main } from '../../components';
 import { fetchApi } from '../../serviсes/api';
 import { People } from '../../serviсes/api.props';
 import styles from './HomePage.module.css';
+import { Outlet, useParams } from 'react-router-dom';
 import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
-import { Outlet } from 'react-router-dom';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
+  const { keyword } = useParams<{ keyword: string }>();
   const [loading, setLoading] = useState<boolean>(false);
   const [searchString] = useSearchQuery();
 
   useEffect(() => {
-    handleSearch(searchString.toString());
-  }, [searchString]);
+    handleSearch(keyword || searchString);
+  }, [keyword, searchString]);
 
   const handleSearch = (searchString: string) => {
     setLoading(true);

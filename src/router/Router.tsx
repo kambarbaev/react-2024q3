@@ -12,6 +12,14 @@ const router = createBrowserRouter([
         path: '/people/:id',
         element: <Details />,
       },
+      {
+        path: '/search/',
+        children: [
+          {
+            path: ':keyword',
+          },
+        ],
+      },
     ],
   },
 ]);
