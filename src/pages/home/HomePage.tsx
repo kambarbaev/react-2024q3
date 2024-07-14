@@ -3,20 +3,16 @@ import { Header, Main } from '../../components';
 import { fetchApi } from '../../serviсes/api';
 import { People } from '../../serviсes/api.props';
 import styles from './HomePage.module.css';
+import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [searchString] = useSearchQuery();
 
   useEffect(() => {
-    const savedSearchString = localStorage.getItem('searchString');
-
-    if (savedSearchString) {
-      handleSearch(savedSearchString);
-    } else {
-      handleSearch('');
-    }
-  }, []);
+    handleSearch(searchString.toString());
+  }, [searchString]);
 
   const handleSearch = (searchString: string) => {
     setLoading(true);

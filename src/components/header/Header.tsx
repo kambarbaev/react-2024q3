@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import styles from './Header.module.css';
 import { HeaderProps } from './Header.props';
 import { Button, SearchInput } from '..';
+import { useNavigate } from 'react-router-dom';
+import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
 
 function Header({ handleSearch }: HeaderProps) {
-  const [searchString, setSearchString] = useState<string>(localStorage.getItem('searchString') || '');
+  const [searchString, setSearchString] = useSearchQuery();
+  const navigate = useNavigate();
 
   const handleInputChange = (value: string) => {
     setSearchString(value);
@@ -12,8 +14,8 @@ function Header({ handleSearch }: HeaderProps) {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    localStorage.setItem('searchString', searchString.trim());
-    handleSearch(searchString.trim());
+    handleSearch(searchString);
+    navigate(`/?search=${encodeURIComponent(searchString.trim())}`);
   };
 
   return (
