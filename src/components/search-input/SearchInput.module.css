@@ -2,7 +2,7 @@
   border: none;
   border-radius: 5px;
   padding: 0px 15px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
 
   &:focus {
