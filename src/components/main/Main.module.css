@@ -4,16 +4,8 @@
   margin: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  grid-template-columns: auto 1fr;
   gap: 20px;
-
-  @media (max-width: 910px) {
-    grid-template-columns: repeat(3, minmax(200px, 1fr));
-  }
-
-  @media (max-width: 699px) {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-  }
 }
 
 .loading,
@@ -24,7 +16,7 @@
   align-items: center;
   font-size: 60px;
   font-weight: bold;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #f8b600;
   height: 80vh;
 }
