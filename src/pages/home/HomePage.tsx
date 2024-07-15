@@ -10,7 +10,13 @@ function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
   const { keyword } = useParams<{ keyword: string }>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [searchString] = useSearchQuery();
+  const [searchString, setSearchString] = useSearchQuery();
+
+  useEffect(() => {
+    if (keyword) {
+      setSearchString(keyword);
+    }
+  }, [keyword, setSearchString]);
 
   useEffect(() => {
     handleSearch(keyword || searchString);

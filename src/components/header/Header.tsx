@@ -1,16 +1,22 @@
-import { useState } from 'react';
 import styles from './Header.module.css';
 import { HeaderProps } from './Header.props';
 import { Button, SearchInput } from '..';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
+import { useEffect, useState } from 'react';
 
 function Header({ handleSearch }: HeaderProps) {
+  const { keyword } = useParams<{ keyword: string }>();
   const [searchString, setSearchString] = useSearchQuery();
-
-  const [inputValue, setInputValue] = useState<string>(searchString || '');
-
+  const [inputValue, setInputValue] = useState<string>(keyword || searchString || '');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (keyword) {
+      setInputValue(keyword);
+      setSearchString(keyword);
+    }
+  }, [keyword, setSearchString]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -19,8 +25,8 @@ function Header({ handleSearch }: HeaderProps) {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    navigate(`/search/${encodeURIComponent(inputValue)}`);
     handleSearch(inputValue);
+    navigate(`/search/${encodeURIComponent(inputValue.trim())}`);
   };
 
   return (
@@ -29,7 +35,7 @@ function Header({ handleSearch }: HeaderProps) {
         <img src="/logotype.png" />
       </div>
       <form className={styles['form']} onSubmit={handleSubmit}>
-        <SearchInput value={inputValue} onChange={handleInputChange} />
+        <SearchInput value={searchString} onChange={handleInputChange} />
         <Button className={styles['search-button']} text="Search" />
       </form>
     </header>
