@@ -2,10 +2,10 @@ import { ApiResponse } from './api.props';
 
 const API_BASE_URL = 'https://swapi.dev/api';
 
-export const fetchApi = async (searchString: string): Promise<ApiResponse> => {
+export const fetchApi = async (searchString: string, page: number): Promise<ApiResponse> => {
   const endpoint = searchString
     ? `${API_BASE_URL}/people/?search=${encodeURIComponent(searchString)}`
-    : `${API_BASE_URL}/people/`;
+    : `${API_BASE_URL}/people/?page=${page}`;
   const response = await fetch(endpoint);
   if (!response.ok) {
     throw new Error('API not available');

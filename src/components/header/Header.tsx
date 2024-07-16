@@ -15,6 +15,7 @@ function Header({ handleSearch }: HeaderProps) {
     if (keyword) {
       setInputValue(keyword);
       setSearchString(keyword);
+      console.log('keyword', keyword);
     }
   }, [keyword, setSearchString]);
 
@@ -25,7 +26,7 @@ function Header({ handleSearch }: HeaderProps) {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    handleSearch(inputValue);
+    handleSearch(inputValue, 1);
     navigate(`/search/${encodeURIComponent(inputValue.trim())}`);
   };
 

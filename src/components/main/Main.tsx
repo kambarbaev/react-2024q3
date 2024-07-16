@@ -2,7 +2,7 @@ import styles from './Main.module.css';
 import { MainProps } from './Main.props';
 import Card from '../card/Card';
 
-function Main({ searchData, loading }: MainProps) {
+function Main({ searchData, loading, currentPage, totalPages, handlePage }: MainProps) {
   return (
     <main className={styles['main']}>
       {loading ? (
@@ -10,12 +10,29 @@ function Main({ searchData, loading }: MainProps) {
       ) : (
         <ul className={styles['list']}>
           {searchData.length > 0 ? (
-            searchData.map((person) => <Card key={person.name} person={person} />)
+            searchData.map((person) => <Card key={person.name} person={person} currentPage={currentPage} />)
           ) : (
             <div className={styles['no-data']}>No available data</div>
           )}
         </ul>
       )}
+      <div className={styles['pagination']}>
+        <button
+          className={styles['pagination-button']}
+          onClick={() => handlePage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>{currentPage}</span>
+        <button
+          className={styles['pagination-button']}
+          onClick={() => handlePage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </main>
   );
 }
