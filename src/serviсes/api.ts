@@ -4,7 +4,7 @@ const API_BASE_URL = 'https://swapi.dev/api';
 
 export const fetchApi = async (searchString: string, page: number): Promise<ApiResponse> => {
   const endpoint = searchString
-    ? `${API_BASE_URL}/people/?search=${encodeURIComponent(searchString)}`
+    ? `${API_BASE_URL}/people/?search=${encodeURIComponent(searchString)}&page=${page}`
     : `${API_BASE_URL}/people/?page=${page}`;
   const response = await fetch(endpoint);
   if (!response.ok) {

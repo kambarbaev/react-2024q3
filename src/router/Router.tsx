@@ -9,20 +9,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/people/page/:page/:id',
+        path: 'people/page/:page/:id',
         element: <Details />,
       },
       {
-        path: '/people/page/:page',
+        path: 'people/page/:page',
+      },
+      {
+        path: 'search/:keyword/page/:page/:id',
         element: <Details />,
       },
       {
-        path: '/search/',
-        children: [
-          {
-            path: ':keyword',
-          },
-        ],
+        path: 'search/:keyword/page/:page',
       },
     ],
   },

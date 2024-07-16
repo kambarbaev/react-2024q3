@@ -27,22 +27,23 @@ function HomePage() {
   useEffect(() => {
     if (keyword) {
       setSearchString(keyword);
-      handleSearch(keyword || searchString, currentPage);
-    }
-    if (page) {
+      handleSearch(keyword, currentPage);
+    } else if (page) {
       setCurrentPage(+page);
-      handleSearch(keyword || searchString, currentPage);
+      handleSearch(searchString, +page);
+    } else {
+      handleSearch(searchString, currentPage);
     }
-  }, [currentPage, handleSearch, keyword, page, searchString, setSearchString]);
+  }, [keyword, page, searchString, currentPage, handleSearch, setSearchString]);
 
   const handlePage = (page: number) => {
     setCurrentPage(page);
-    navigate(`people/page/${page}`);
+    if (keyword) {
+      navigate(`/search/${keyword}/page/${page}`);
+    } else {
+      navigate(`/people/page/${page}`);
+    }
   };
-
-  useEffect(() => {
-    handleSearch(keyword || searchString, currentPage);
-  }, [keyword, searchString, currentPage, handleSearch]);
 
   return (
     <>
