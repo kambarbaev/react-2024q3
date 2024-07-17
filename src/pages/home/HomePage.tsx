@@ -1,26 +1,45 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Header, Main } from '../../components';
 import styles from './HomePage.module.css';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
+import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
 import { People } from '../../serviсes/api.props';
 import { fetchApi } from '../../serviсes/api';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
-  const { keyword } = useParams<{ keyword: string; page: string }>();
+  const { keyword, page } = useParams<{ keyword: string; page: string }>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchString, setSearchString] = useSearchQuery();
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(page ? +page : 1);
   const navigate = useNavigate();
 
   const handleSearch = useCallback((searchString: string, page: number) => {
     setLoading(true);
-    fetchApi(searchString, page).then((data) => {
-      setSearchData(data.results);
-      setTotalPages(Math.ceil(data.count / 10));
-      setLoading(false);
-    });
+    fetchApi(searchString, page)
+      .then((data) => {
+        setSearchData(data.results);
+        setTotalPages(Math.ceil(data.count / 10));
+        setLoading(false);
+      })
+      .catch((data) => {
+        console.error(data);
+        setLoading(false);
+      });
   }, []);
+
+  useEffect(() => {
+    if (keyword) {
+      setSearchString(keyword);
+      handleSearch(keyword, currentPage);
+    } else if (page) {
+      setCurrentPage(+page);
+      handleSearch(keyword ? keyword : '', +page);
+    } else {
+      handleSearch(searchString, currentPage);
+    }
+  }, [keyword, page, searchString, currentPage, handleSearch, setSearchString]);
 
   const handlePage = (page: number) => {
     setCurrentPage(page);
