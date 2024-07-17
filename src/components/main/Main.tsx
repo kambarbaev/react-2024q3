@@ -1,6 +1,7 @@
 import styles from './Main.module.css';
 import { MainProps } from './Main.props';
 import Card from '../card/Card';
+import Pagination from '../pagination/Pagination';
 
 function Main({ searchData, loading, currentPage, totalPages, handlePage }: MainProps) {
   return (
@@ -16,25 +17,7 @@ function Main({ searchData, loading, currentPage, totalPages, handlePage }: Main
           )}
         </ul>
       )}
-      {totalPages > 1 && (
-        <div className={styles['pagination']}>
-          <button
-            className={styles['pagination-button']}
-            onClick={() => handlePage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-          <span>{currentPage}</span>
-          <button
-            className={styles['pagination-button']}
-            onClick={() => handlePage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      )}
+      {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePage} />}
     </main>
   );
 }
