@@ -29,15 +29,35 @@ function Details() {
   return (
     <div className={styles['details']}>
       {loading ? (
-        <div>Loading...</div>
+        <div className={styles['loading']}>Loading...</div>
       ) : error ? (
-        <div>No available data </div>
+        <div className={styles['error']}>No available data </div>
       ) : (
         person && (
-          <>
-            <h2>{person.name}</h2>
-            {/* Добавьте другие свойства персонажа, если нужно */}
-          </>
+          <div className={styles['description']}>
+            <h2 className={styles['name']}>{person.name}</h2>
+            <div className={styles['row']}>
+              Height: <span>{person.height}</span>
+            </div>
+            <div className={styles['row']}>
+              Mass: <span>{person.mass}</span>
+            </div>
+            <div className={styles['row']}>
+              Hair Color: <span>{person.hair_color}</span>
+            </div>
+            <div className={styles['row']}>
+              Skin Color: <span>{person.skin_color}</span>
+            </div>
+            <div className={styles['row']}>
+              Eye Color: <span>{person.eye_color}</span>
+            </div>
+            <div className={styles['row']}>
+              Birth Year: <span>{person.birth_year}</span>
+            </div>
+            <div className={styles['row']}>
+              Gender: <span>{person.gender}</span>
+            </div>
+          </div>
         )
       )}
     </div>
