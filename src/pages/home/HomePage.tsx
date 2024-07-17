@@ -1,16 +1,14 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Header, Main } from '../../components';
 import styles from './HomePage.module.css';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
-import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
 import { People } from '../../serviсes/api.props';
 import { fetchApi } from '../../serviсes/api';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
-  const { keyword, page } = useParams<{ keyword: string; page: string }>();
+  const { keyword } = useParams<{ keyword: string; page: string }>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [searchString, setSearchString] = useSearchQuery();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const navigate = useNavigate();
@@ -23,18 +21,6 @@ function HomePage() {
       setLoading(false);
     });
   }, []);
-
-  useEffect(() => {
-    if (keyword) {
-      setSearchString(keyword);
-      handleSearch(keyword, currentPage);
-    } else if (page) {
-      setCurrentPage(+page);
-      handleSearch(searchString, +page);
-    } else {
-      handleSearch(searchString, currentPage);
-    }
-  }, [keyword, page, searchString, currentPage, handleSearch, setSearchString]);
 
   const handlePage = (page: number) => {
     setCurrentPage(page);

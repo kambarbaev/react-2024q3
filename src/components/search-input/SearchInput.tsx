@@ -4,7 +4,7 @@ import { SearchInputProps } from './SearchInput.props';
 
 function SearchInput({ value, onChange }: SearchInputProps) {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+    onChange!(event.target.value);
   };
 
   return (

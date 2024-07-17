@@ -5,32 +5,32 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
 import { useEffect, useState } from 'react';
 
-function Header({ handleSearch }: HeaderProps) {
-  const { keyword } = useParams<{ keyword: string }>();
+function Header({ handleSearch, currentPage, handlePage }: HeaderProps) {
+  const { keyword, page } = useParams<{ keyword: string; page: string }>();
   const [searchString, setSearchString] = useSearchQuery();
-  const [inputValue, setInputValue] = useState<string>(keyword || searchString || '');
+  const [inputValue, setInputValue] = useState<string>(searchString);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (keyword) {
-      setInputValue(keyword);
+    if (page && keyword) {
+      handleSearch(keyword, currentPage!);
       setSearchString(keyword);
+      navigate(`/search/${keyword}/page/${currentPage}`);
+    } else {
+      handleSearch(searchString, currentPage!);
+      handlePage!(currentPage!);
     }
-  }, [keyword, setSearchString]);
+  }, [keyword, page, setSearchString, currentPage]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
     setSearchString(value);
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     handleSearch(inputValue, 1);
-    if (inputValue.trim()) {
-      navigate(`/search/${encodeURIComponent(inputValue.trim())}/page/1`);
-    } else {
-      navigate(`/people/page/1`);
-    }
+    handlePage!(1);
   };
 
   return (
