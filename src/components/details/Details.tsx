@@ -16,6 +16,7 @@ function Details() {
       fetchPerson(personUrl)
         .then((data: People) => {
           setPerson(data);
+          setError(false);
           setLoading(false);
         })
         .catch((error) => {
