@@ -1,8 +1,9 @@
 import { ButtonProps } from './Button.props';
+import styles from './Button.module.css';
 
-function Button({ className, onClick, text }: ButtonProps) {
+function Button({ onClick, text, disabled }: ButtonProps) {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={styles['button']} onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );

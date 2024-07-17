@@ -1,24 +1,23 @@
+import { Button } from '..';
 import styles from './Pagination.module.css';
 import { PaginationProps } from './Pagination.props';
 
 function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   return (
     <div className={styles['pagination']}>
-      <button
+      <Button
         className={styles['pagination-button']}
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-      >
-        Previous
-      </button>
-      <span>{currentPage}</span>
-      <button
+        text="Previous"
+      />
+      <span className={styles['page-counter']}>{currentPage}</span>
+      <Button
         className={styles['pagination-button']}
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-      >
-        Next
-      </button>
+        text="Next"
+      />
     </div>
   );
 }

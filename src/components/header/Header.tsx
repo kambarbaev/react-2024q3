@@ -41,7 +41,7 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
       </div>
       <form className={styles['form']} onSubmit={handleSubmit}>
         <SearchInput value={searchString} onChange={handleInputChange} />
-        <Button className={styles['search-button']} text="Search" />
+        <Button text="Search" />
       </form>
     </header>
   );
