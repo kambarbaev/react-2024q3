@@ -2,25 +2,15 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { CardProps } from './Card.props';
 import { getPersonIdFromUrl } from '../../utils/getPersonIdFromUrl';
 import style from './Card.module.css';
-import { useEffect, useState } from 'react';
 
-function Card({ person, currentPage }: CardProps) {
-  const [open, setOpen] = useState<boolean>(false);
+function Card({ person, currentPage, isOpen, onCardClick }: CardProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const id = getPersonIdFromUrl(person.url);
 
-  useEffect(() => {
-    if (location.pathname.includes(id)) {
-      setOpen(true);
-    } else {
-      setOpen(false);
-    }
-  }, [id, location.pathname, open]);
-
   const handleClick = () => {
-    if (!open) {
-      setOpen(true);
+    onCardClick(id, isOpen);
+    if (!isOpen) {
       if (location.pathname.includes('search')) {
         const keyword = location.pathname.split('/')[2];
         navigate(`/search/${keyword}/page/${currentPage}/${id}`);
@@ -28,7 +18,6 @@ function Card({ person, currentPage }: CardProps) {
         navigate(`/people/page/${currentPage}/${id}`);
       }
     } else {
-      setOpen(false);
       if (location.pathname.includes('search')) {
         const keyword = location.pathname.split('/')[2];
         navigate(`/search/${keyword}/page/${currentPage}`);
