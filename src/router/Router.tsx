@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../app/App';
-import { Details, ErrorPage } from '../components';
+import { Details, DetailsTemplate, ErrorPage } from '../components';
 
 const router = createBrowserRouter([
   {
@@ -8,12 +8,14 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <DetailsTemplate /> },
       {
         path: 'people/page/:page/:id',
         element: <Details />,
       },
       {
         path: 'people/page/:page',
+        element: <DetailsTemplate />,
       },
       {
         path: 'search/:keyword/page/:page/:id',
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'search/:keyword/page/:page',
+        element: <DetailsTemplate />,
       },
     ],
   },
