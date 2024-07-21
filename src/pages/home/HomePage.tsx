@@ -50,7 +50,7 @@ function HomePage() {
 
   return (
     <>
-      <aside className={styles['aside']}>
+      <aside>
         <Header handleSearch={handleSearch} currentPage={currentPage} totalPages={totalPages} handlePage={handlePage} />
         <Main
           searchData={searchData}
