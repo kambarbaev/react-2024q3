@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Header, Main } from '../../components';
-import styles from './HomePage.module.css';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
-import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
-import { People } from '../../serviсes/api.props';
-import { fetchApi } from '../../serviсes/api';
+import { fetchApi, People } from '../../serviсes/index';
+import { useSearchQuery } from '@hooks/index';
+import { Header, Main } from '@components/index';
+import styles from './HomePage.module.css';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);

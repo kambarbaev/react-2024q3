@@ -1,6 +1,6 @@
-import { Button } from '..';
-import styles from './Pagination.module.css';
+import { Button } from '@components/index';
 import { PaginationProps } from './Pagination.props';
+import styles from './Pagination.module.css';
 
 function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   return (

@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { CardProps } from './Card.props';
-import { getPersonIdFromUrl } from '../../utils/getPersonIdFromUrl';
+import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
 import style from './Card.module.css';
 
 function Card({ person, currentPage, isOpen, onCardClick }: CardProps) {

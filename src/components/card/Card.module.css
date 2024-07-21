@@ -3,6 +3,7 @@
   border: 1px solid transparent;
   padding: 5px;
   cursor: pointer;
+
   &:hover {
     border: 1px solid #f8b600;
   }

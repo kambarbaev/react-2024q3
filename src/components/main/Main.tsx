@@ -1,9 +1,8 @@
-import styles from './Main.module.css';
-import { MainProps } from './Main.props';
-import Card from '../card/Card';
-import Pagination from '../pagination/Pagination';
 import { useState } from 'react';
-import { getPersonIdFromUrl } from '../../utils/getPersonIdFromUrl';
+import { Card, Pagination } from '@components/index';
+import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
+import { MainProps } from './Main.props';
+import styles from './Main.module.css';
 
 function Main({ searchData, loading, currentPage, totalPages, handlePage }: MainProps) {
   const [openId, setOpenId] = useState<string | null>(null);

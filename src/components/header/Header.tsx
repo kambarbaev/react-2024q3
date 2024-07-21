@@ -1,9 +1,9 @@
-import styles from './Header.module.css';
-import { HeaderProps } from './Header.props';
-import { Button, SearchInput } from '..';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useSearchQuery } from '../../hooks/useSearchString/useSearchString';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSearchQuery } from '@hooks/useSearchString/useSearchString';
+import { Button, SearchInput } from '@components/index';
+import { HeaderProps } from './Header.props';
+import styles from './Header.module.css';
 
 function Header({ handleSearch, handlePage }: HeaderProps) {
   const { keyword } = useParams<{ keyword: string }>();

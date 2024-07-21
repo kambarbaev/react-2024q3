@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchPerson } from '../../serviсes/api';
+import { fetchPerson, People } from '../../serviсes/index';
 import styles from './Details.module.css';
-import { People } from '../../serviсes/api.props';
 
 function Details() {
   const [person, setPerson] = useState<People | null>(null);

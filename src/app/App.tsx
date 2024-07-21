@@ -1,5 +1,5 @@
+import { HomePage } from '@pages/index';
 import styles from './App.module.css';
-import { HomePage } from '../pages';
 
 function App() {
   return (

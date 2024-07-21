@@ -1,4 +1,4 @@
-import { People } from '../../serviсes/api.props';
+import { People } from '../../serviсes/api/api.props';
 
 export type CardProps = {
   person: People;
