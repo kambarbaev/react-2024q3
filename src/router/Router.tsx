@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../app/App';
-import { Details, DetailsTemplate, ErrorPage } from '../components';
+import { Details, DetailsTemplate, ErrorPage } from '@components/index';
 
 const router = createBrowserRouter([
   {

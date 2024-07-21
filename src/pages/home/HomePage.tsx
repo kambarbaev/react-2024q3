@@ -3,7 +3,6 @@ import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import { fetchApi, People } from '../../serviсes/index';
 import { useSearchQuery } from '@hooks/index';
 import { Header, Main } from '@components/index';
-import styles from './HomePage.module.css';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
