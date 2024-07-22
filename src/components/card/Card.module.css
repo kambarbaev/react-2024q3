@@ -1,0 +1,25 @@
+.card {
+  background-color: #141414;
+  border: 1px solid transparent;
+  padding: 5px;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid #f8b600;
+  }
+}
+
+.name {
+  margin: 0;
+  text-align: center;
+  color: #f8b600;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  & span {
+    color: #f8b600;
+  }
+}
