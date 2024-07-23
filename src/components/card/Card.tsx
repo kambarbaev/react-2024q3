@@ -1,9 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { CardProps } from './Card.props';
 import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
-import style from './Card.module.css';
+import styles from './Card.module.css';
+import { useTheme } from '@hooks/useTheme/useTheme';
 
 function Card({ person, currentPage, isOpen, onCardClick }: CardProps) {
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const id = getPersonIdFromUrl(person.url);
@@ -28,8 +30,8 @@ function Card({ person, currentPage, isOpen, onCardClick }: CardProps) {
   };
 
   return (
-    <li className={style['card']} onClick={handleClick}>
-      <h2 className={style['name']}>{person.name}</h2>
+    <li className={`${styles['card']} ${theme === 'light' ? '' : styles['dark']}`} onClick={handleClick}>
+      <h2 className={`${styles['name']} ${theme === 'light' ? '' : styles['dark']}`}>{person.name}</h2>
     </li>
   );
 }

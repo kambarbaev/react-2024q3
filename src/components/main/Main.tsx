@@ -3,9 +3,11 @@ import { Card, Pagination } from '@components/index';
 import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
 import { MainProps } from './Main.props';
 import styles from './Main.module.css';
+import { useTheme } from '@hooks/useTheme/useTheme';
 
 function Main({ searchData, loading, currentPage, totalPages, handlePage }: MainProps) {
   const [openId, setOpenId] = useState<string | null>(null);
+  const { theme } = useTheme();
 
   const handleCardClick = (id: string, isOpen: boolean) => {
     setOpenId(isOpen ? null : id);
@@ -14,7 +16,7 @@ function Main({ searchData, loading, currentPage, totalPages, handlePage }: Main
   return (
     <main className={styles['main']}>
       {loading ? (
-        <div className={styles['loading']}>Loading...</div>
+        <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>
       ) : (
         <ul className={styles['list']}>
           {searchData.length > 0 ? (
@@ -28,7 +30,7 @@ function Main({ searchData, loading, currentPage, totalPages, handlePage }: Main
               />
             ))
           ) : (
-            <div className={styles['no-data']}>No available data</div>
+            <div className={`${styles['no-data']} ${theme === 'light' ? '' : styles['dark']}`}>No available data</div>
           )}
         </ul>
       )}

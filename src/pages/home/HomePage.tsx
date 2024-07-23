@@ -2,7 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import { fetchApi, People } from '../../serviсes/index';
 import { useSearchQuery } from '@hooks/index';
+import { useTheme } from '@hooks/useTheme/useTheme';
 import { Header, Main } from '@components/index';
+
+import styles from './HomePage.module.css';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
@@ -11,6 +14,7 @@ function HomePage() {
   const [searchString, setSearchString] = useSearchQuery();
   const [totalPages, setTotalPages] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(page ? +page : 1);
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const handleSearch = useCallback((searchString: string, page: number) => {
@@ -49,19 +53,26 @@ function HomePage() {
   };
 
   return (
-    <>
-      <aside>
-        <Header handleSearch={handleSearch} currentPage={currentPage} totalPages={totalPages} handlePage={handlePage} />
-        <Main
-          searchData={searchData}
-          loading={loading}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          handlePage={handlePage}
-        />
-      </aside>
-      <Outlet />
-    </>
+    <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>
+      <div className={styles['container']}>
+        <aside>
+          <Header
+            handleSearch={handleSearch}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePage={handlePage}
+          />
+          <Main
+            searchData={searchData}
+            loading={loading}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePage={handlePage}
+          />
+        </aside>
+        <Outlet />
+      </div>
+    </div>
   );
 }
 

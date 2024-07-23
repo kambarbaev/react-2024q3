@@ -9,7 +9,11 @@
   font-size: 40px;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
-  color: #f8b600;
+  color: var(--light-text-color);
+
+  &.dark {
+    color: #f8b600;
+  }
 }
 
 .description {

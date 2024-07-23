@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchPerson, People } from '../../serviсes/index';
 import styles from './Details.module.css';
+import { useTheme } from '@hooks/useTheme/useTheme';
 
 function Details() {
   const [person, setPerson] = useState<People | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const { theme } = useTheme();
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,9 +31,9 @@ function Details() {
   return (
     <div className={styles['details']}>
       {loading ? (
-        <div className={styles['loading']}>Loading...</div>
+        <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>
       ) : error ? (
-        <div className={styles['error']}>No available data </div>
+        <div className={`${styles['error']} ${theme === 'light' ? '' : styles['dark']}`}>No available data </div>
       ) : (
         person && (
           <div className={styles['description']}>

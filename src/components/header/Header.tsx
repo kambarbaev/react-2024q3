@@ -4,8 +4,7 @@ import { useSearchQuery } from '@hooks/useSearchString/useSearchString';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Button, SearchInput } from '@components/index';
 import { HeaderProps } from './Header.props';
-import lightStyles from './Header.module.css';
-import darkStyles from './Header-dark.module.css';
+import styles from './Header.module.css';
 
 function Header({ handleSearch, handlePage }: HeaderProps) {
   const { keyword } = useParams<{ keyword: string }>();
@@ -14,7 +13,6 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
-  const styles = theme === 'light' ? lightStyles : darkStyles;
   const buttonText = theme === 'light' ? 'Dark' : 'Light';
 
   useEffect(() => {
@@ -41,7 +39,7 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
   };
 
   return (
-    <header className={theme ? styles['header'] : styles['header-dark']}>
+    <header className={`${styles['header']} ${theme === 'light' ? '' : styles['dark']}`}>
       <div className={styles['logotype']}>
         <img src="/logotype.png" />
       </div>
@@ -49,13 +47,7 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
         <SearchInput value={searchString} onChange={handleInputChange} />
         <Button text="Search" />
       </form>
-      <Button
-        text={buttonText}
-        onClick={() => {
-          console.log('Dark');
-          toggleTheme();
-        }}
-      />
+      <Button text={buttonText} onClick={toggleTheme} />
     </header>
   );
 }

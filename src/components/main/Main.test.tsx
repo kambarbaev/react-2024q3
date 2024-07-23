@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Main from './Main';
 import { MainProps } from './Main.props';
 import { People } from '../../serviсes';
+import { ThemeProvider } from '@context/index';
 
 const mockData = [
   { name: 'Luke Skywalker', url: 'https://swapi.dev/api/people/1/' },
@@ -23,7 +24,9 @@ describe('Main Component', () => {
   test('renders the correct number of cards', () => {
     render(
       <MemoryRouter>
-        <Main {...mockProps} />
+        <ThemeProvider>
+          <Main {...mockProps} />
+        </ThemeProvider>
       </MemoryRouter>,
     );
     const cards = screen.getAllByRole('listitem');
@@ -33,7 +36,9 @@ describe('Main Component', () => {
   test('shows loading message when loading', () => {
     render(
       <MemoryRouter>
-        <Main {...mockProps} loading={true} />
+        <ThemeProvider>
+          <Main {...mockProps} loading={true} />
+        </ThemeProvider>
       </MemoryRouter>,
     );
     expect(screen.getByText('Loading...')).toBeInTheDocument();
@@ -42,7 +47,9 @@ describe('Main Component', () => {
   test('shows no data message when searchData is empty', () => {
     render(
       <MemoryRouter>
-        <Main {...mockProps} searchData={[]} />
+        <ThemeProvider>
+          <Main {...mockProps} searchData={[]} />
+        </ThemeProvider>
       </MemoryRouter>,
     );
     expect(screen.getByText('No available data')).toBeInTheDocument();

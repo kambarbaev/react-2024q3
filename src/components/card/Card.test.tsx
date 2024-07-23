@@ -1,10 +1,10 @@
-// src/components/card/Card.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Card from './Card';
 import { CardProps } from './Card.props';
 import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
 import { People } from '../../serviсes';
+import { ThemeProvider } from '@context/index';
 
 const mockPerson = {
   name: 'Luke Skywalker',
@@ -22,7 +22,9 @@ describe('Card Component', () => {
   test('renders card data correctly', () => {
     render(
       <MemoryRouter>
-        <Card {...mockCardProps} />
+        <ThemeProvider>
+          <Card {...mockCardProps} />
+        </ThemeProvider>
       </MemoryRouter>,
     );
 
@@ -32,7 +34,9 @@ describe('Card Component', () => {
   test('check card is open and navigates correctly on card click', () => {
     render(
       <MemoryRouter>
-        <Card {...mockCardProps} isOpen={true} />
+        <ThemeProvider>
+          <Card {...mockCardProps} isOpen={true} />
+        </ThemeProvider>
       </MemoryRouter>,
     );
 
@@ -45,7 +49,9 @@ describe('Card Component', () => {
   test('check card is closed and navigates correctly on card click', () => {
     render(
       <MemoryRouter>
-        <Card {...mockCardProps} isOpen={false} />
+        <ThemeProvider>
+          <Card {...mockCardProps} isOpen={false} />
+        </ThemeProvider>
       </MemoryRouter>,
     );
 
