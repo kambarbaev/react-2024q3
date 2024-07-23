@@ -1,11 +1,14 @@
 import { HomePage } from '@pages/index';
 import styles from './App.module.css';
+import { ThemeProvider } from '@context/index';
 
 function App() {
   return (
-    <div className={styles['app']}>
-      <HomePage />
-    </div>
+    <ThemeProvider>
+      <div className={styles['app']}>
+        <HomePage />
+      </div>
+    </ThemeProvider>
   );
 }
 

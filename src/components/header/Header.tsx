@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSearchQuery } from '@hooks/useSearchString/useSearchString';
+import { useTheme } from '@hooks/useTheme/useTheme';
 import { Button, SearchInput } from '@components/index';
 import { HeaderProps } from './Header.props';
-import styles from './Header.module.css';
+import lightStyles from './Header.module.css';
+import darkStyles from './Header-dark.module.css';
 
 function Header({ handleSearch, handlePage }: HeaderProps) {
   const { keyword } = useParams<{ keyword: string }>();
   const [searchString, setSearchString] = useSearchQuery();
   const [inputValue, setInputValue] = useState<string>(keyword || searchString || '');
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+
+  const styles = theme === 'light' ? lightStyles : darkStyles;
+  const buttonText = theme === 'light' ? 'Dark' : 'Light';
 
   useEffect(() => {
     if (keyword) {
@@ -35,7 +41,7 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
   };
 
   return (
-    <header className={styles['header']}>
+    <header className={theme ? styles['header'] : styles['header-dark']}>
       <div className={styles['logotype']}>
         <img src="/logotype.png" />
       </div>
@@ -43,6 +49,13 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
         <SearchInput value={searchString} onChange={handleInputChange} />
         <Button text="Search" />
       </form>
+      <Button
+        text={buttonText}
+        onClick={() => {
+          console.log('Dark');
+          toggleTheme();
+        }}
+      />
     </header>
   );
 }

@@ -31,7 +31,8 @@
       "@assets/*": ["./src/assets/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@router/*": ["./src/router/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@context/*": ["./src/context/*"]
     }
   },
   "include": ["src"]
