@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Main from './Main';
 import { MainProps } from './Main.props';
-import { People } from '../../serviсes';
+import { People } from '@services/index';
 import { ThemeProvider } from '@context/index';
 
 const mockData = [

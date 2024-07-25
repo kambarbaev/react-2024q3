@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchPerson, People } from '../../serviсes/index';
+import { fetchPerson, People } from '@services/index';
 import styles from './Details.module.css';
 import { useTheme } from '@hooks/useTheme/useTheme';
 

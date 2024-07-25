@@ -1,11 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Outlet, useParams, useNavigate } from 'react-router-dom';
-import { fetchApi, People } from '../../serviсes/index';
 import { useSearchQuery } from '@hooks/index';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Header, Main } from '@components/index';
-
 import styles from './HomePage.module.css';
+import { fetchApi, People } from '@services/index';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);

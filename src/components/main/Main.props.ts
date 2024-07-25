@@ -1,4 +1,4 @@
-import { People } from '../../serviсes/api/api.props';
+import { People } from '@services/index';
 
 export type MainProps = {
   searchData: People[];

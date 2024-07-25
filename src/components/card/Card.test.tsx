@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Card from './Card';
 import { CardProps } from './Card.props';
 import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
-import { People } from '../../serviсes';
+import { People } from '@services/index';
 import { ThemeProvider } from '@context/index';
 
 const mockPerson = {
