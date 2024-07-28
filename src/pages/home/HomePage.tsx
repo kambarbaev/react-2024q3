@@ -1,87 +1,29 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Outlet, useParams, useNavigate } from 'react-router-dom';
-import { useSearchQuery } from '@hooks/index';
+import { Outlet, useParams } from 'react-router-dom';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Header, Main } from '@components/index';
 import styles from './HomePage.module.css';
-import { fetchApi, People, peopleApi } from '@services/index';
+import { peopleApi } from '@services/index';
 
 function HomePage() {
-  const [searchData, setSearchData] = useState<People[]>([]);
-  const { keyword, page } = useParams<{ keyword: string; page: string }>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [searchString, setSearchString] = useSearchQuery();
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(page ? +page : 1);
+  const { page } = useParams<{ keyword: string; page: string }>();
   const { theme } = useTheme();
-  const navigate = useNavigate();
-  const { data, isError, isLoading } = peopleApi.useGetPersonsQuery(1);
 
-  const handleSearch = useCallback((searchString: string, page: number) => {
-    setLoading(true);
-    fetchApi(searchString, page)
-      .then((data) => {
-        setSearchData(data.results);
-        setTotalPages(Math.ceil(data.count / 10));
-        setLoading(false);
-      })
-      .catch((data) => {
-        console.error(data);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (keyword) {
-      setSearchString(keyword);
-      handleSearch(keyword, currentPage);
-    } else if (page) {
-      setCurrentPage(+page);
-      handleSearch(keyword ? keyword : '', +page);
-    } else {
-      handleSearch(searchString, currentPage);
-    }
-  }, [keyword, page, searchString, currentPage, handleSearch, setSearchString]);
-
-  const handlePage = (page: number) => {
-    setCurrentPage(page);
-    if (keyword) {
-      navigate(`/search/${keyword}/page/${page}`);
-    } else {
-      navigate(`/people/page/${page}`);
-    }
-  };
+  const { data, error, isLoading } = peopleApi.useGetPersonsQuery(page ? +page : 1);
 
   return (
     <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>
       <div className={styles['container']}>
         <aside>
-          <Header
-            handleSearch={handleSearch}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            handlePage={handlePage}
-          />
+          <Header />
           <Main
-            searchData={searchData}
-            loading={loading}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            handlePage={handlePage}
+            searchData={data?.results || []}
+            loading={isLoading}
+            currentPage={+page!}
+            totalPages={1 || 2}
+            isError={error}
           />
         </aside>
         <Outlet />
-      </div>
-      <div className="test">
-        {isLoading && <div>Loading...</div>}
-        {isError && <div>Error...</div>}
-        {data && (
-          <div>
-            {data.results.map((person) => (
-              <div key={person.name}>{person.name}</div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

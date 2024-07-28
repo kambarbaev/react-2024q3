@@ -5,5 +5,6 @@ export type MainProps = {
   loading: boolean;
   currentPage: number;
   totalPages: number;
-  handlePage: (page: number) => void;
+  handlePage?: (page: number) => void;
+  isError: unknown;
 };
