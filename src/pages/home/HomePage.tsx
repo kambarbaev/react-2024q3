@@ -4,7 +4,7 @@ import { useSearchQuery } from '@hooks/index';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Header, Main } from '@components/index';
 import styles from './HomePage.module.css';
-import { fetchApi, People } from '@services/index';
+import { fetchApi, People, peopleApi } from '@services/index';
 
 function HomePage() {
   const [searchData, setSearchData] = useState<People[]>([]);
@@ -15,6 +15,7 @@ function HomePage() {
   const [currentPage, setCurrentPage] = useState<number>(page ? +page : 1);
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const { data, isError, isLoading } = peopleApi.useGetPersonsQuery(1);
 
   const handleSearch = useCallback((searchString: string, page: number) => {
     setLoading(true);
@@ -70,6 +71,17 @@ function HomePage() {
           />
         </aside>
         <Outlet />
+      </div>
+      <div className="test">
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Error...</div>}
+        {data && (
+          <div>
+            {data.results.map((person) => (
+              <div key={person.name}>{person.name}</div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
