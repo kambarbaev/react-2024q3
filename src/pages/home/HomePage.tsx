@@ -36,13 +36,7 @@ function HomePage() {
       <div className={styles['container']}>
         <aside>
           <Header />
-          <Main
-            searchData={data?.results || []}
-            loading={isLoading}
-            currentPage={+pageNumber!}
-            totalPages={1 || 2}
-            isError={error}
-          />
+          <Main searchData={data?.results || []} loading={isLoading} isError={error} />
         </aside>
         <Outlet />
       </div>

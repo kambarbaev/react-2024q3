@@ -1,18 +1,20 @@
-import { Button } from '@components/index';
-import styles from './Pagination.module.css';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { setPage } from '../../features/searchSlice';
+import { Button } from '@components/index';
+import styles from './Pagination.module.css';
 
 function Pagination() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { currentPage, totalPages } = useAppSelector((state) => ({
     currentPage: state.search.pageNumber,
     totalPages: state.search.totalPages,
   }));
 
-  const dispatch = useAppDispatch();
-
   const handlePageChange = (page: number) => {
     dispatch(setPage(page));
+    navigate(`/people/page/${page}`);
   };
 
   return (
