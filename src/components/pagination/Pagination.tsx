@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { setPage } from '../../features/searchSlice';
 import { Button } from '@components/index';
@@ -7,14 +7,20 @@ import styles from './Pagination.module.css';
 function Pagination() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { page, keyword } = useParams<{ keyword: string; page: string }>();
   const { currentPage, totalPages } = useAppSelector((state) => ({
     currentPage: state.search.pageNumber,
     totalPages: state.search.totalPages,
   }));
 
-  const handlePageChange = (page: number) => {
-    dispatch(setPage(page));
-    navigate(`/people/page/${page}`);
+  const handlePageChange = (pageNumber: number) => {
+    dispatch(setPage(pageNumber));
+    if (keyword) {
+      navigate(`/search/${keyword}/page/${page}`);
+    }
+    if (page && !keyword) {
+      navigate(`/people/page/${page}`);
+    }
   };
 
   return (
