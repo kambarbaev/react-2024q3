@@ -1,4 +1,4 @@
 export interface SearchState {
-  page: number;
+  pageNumber: number;
   search: string;
 }

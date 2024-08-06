@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SearchState } from './searchModel';
 
 const initialState: SearchState = {
-  page: 1,
+  pageNumber: 1,
   search: localStorage.getItem('searchString') || '',
 };
 
@@ -11,7 +11,7 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setPage(state, action: PayloadAction<number>) {
-      state.page = action.payload;
+      state.pageNumber = action.payload;
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;

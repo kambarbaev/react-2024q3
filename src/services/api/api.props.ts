@@ -25,6 +25,6 @@ export interface ApiResponse {
 }
 
 export type GetPersonsParams = {
-  page: number;
+  pageNumber: number;
   search: string;
 };

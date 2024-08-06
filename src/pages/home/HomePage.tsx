@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Header, Main } from '@components/index';
 import styles from './HomePage.module.css';
@@ -7,12 +7,11 @@ import { RootState } from '../../store/store.models';
 import { useAppSelector } from '@hooks/redux';
 
 function HomePage() {
-  // const { page } = useParams<{ keyword: string; page: string }>();
-  const { page, search } = useAppSelector((state: RootState) => state.search);
+  const { page } = useParams<{ keyword: string; page: string }>();
+  const { pageNumber, search } = useAppSelector((state: RootState) => state.search);
   const { theme } = useTheme();
-  // const [searchString] = useSearchQuery();
 
-  const { data, error, isLoading } = useGetPersonsQuery({ page, search });
+  const { data, error, isLoading } = useGetPersonsQuery({ pageNumber: page ? +page! : pageNumber, search });
 
   return (
     <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>
@@ -22,7 +21,7 @@ function HomePage() {
           <Main
             searchData={data?.results || []}
             loading={isLoading}
-            currentPage={+page!}
+            currentPage={+pageNumber!}
             totalPages={1 || 2}
             isError={error}
           />

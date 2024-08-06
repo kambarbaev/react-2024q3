@@ -6,11 +6,11 @@ export const peopleApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
   endpoints: (build) => ({
     getPersons: build.query<ApiResponse, GetPersonsParams>({
-      query: ({ page, search }) => ({
+      query: ({ pageNumber, search }) => ({
         url: `people/`,
         params: {
           search: search,
-          page: page,
+          page: pageNumber,
         },
       }),
     }),
