@@ -1,14 +1,18 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Header, Main } from '@components/index';
 import styles from './HomePage.module.css';
-import { peopleApi } from '@services/index';
+import { useGetPersonsQuery } from '@services/api/newApi';
+import { RootState } from '../../store/store.models';
+import { useAppSelector } from '@hooks/redux';
 
 function HomePage() {
-  const { page } = useParams<{ keyword: string; page: string }>();
+  // const { page } = useParams<{ keyword: string; page: string }>();
+  const { page, search } = useAppSelector((state: RootState) => state.search);
   const { theme } = useTheme();
+  // const [searchString] = useSearchQuery();
 
-  const { data, error, isLoading } = peopleApi.useGetPersonsQuery(page ? +page : 1);
+  const { data, error, isLoading } = useGetPersonsQuery({ page, search });
 
   return (
     <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>

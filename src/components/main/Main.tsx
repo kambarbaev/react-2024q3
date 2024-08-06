@@ -6,8 +6,8 @@ import styles from './Main.module.css';
 import { useTheme } from '@hooks/useTheme/useTheme';
 
 function Main({ searchData, loading, currentPage, totalPages, handlePage }: MainProps) {
-  const [openId, setOpenId] = useState<string | null>(null);
   const { theme } = useTheme();
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const handleCardClick = (id: string, isOpen: boolean) => {
     setOpenId(isOpen ? null : id);

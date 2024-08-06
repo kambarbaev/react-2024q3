@@ -23,3 +23,8 @@ export interface ApiResponse {
   previous: string | null;
   results: People[];
 }
+
+export type GetPersonsParams = {
+  page: number;
+  search: string;
+};
