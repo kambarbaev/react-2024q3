@@ -6,7 +6,7 @@ import { useGetPersonsQuery } from '@services/api/newApi';
 import { RootState } from '../../store/store.models';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { useEffect } from 'react';
-import { setPage, setSearch } from '../../features/searchSlice';
+import { setPage, setSearch, setTotalPages } from '../../features/searchSlice';
 
 function HomePage() {
   const { pageNumber, search } = useAppSelector((state: RootState) => state.search);
@@ -24,6 +24,12 @@ function HomePage() {
   }, [page, keyword, dispatch]);
 
   const { data, error, isLoading } = useGetPersonsQuery({ pageNumber, search });
+
+  useEffect(() => {
+    if (data && data.count !== undefined) {
+      dispatch(setTotalPages(data.count));
+    }
+  }, [data, dispatch]);
 
   return (
     <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>

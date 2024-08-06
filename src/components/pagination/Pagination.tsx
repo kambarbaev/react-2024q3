@@ -4,8 +4,9 @@ import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { setPage } from '../../features/searchSlice';
 
 function Pagination() {
-  const { currentPage } = useAppSelector((state) => ({
+  const { currentPage, totalPages } = useAppSelector((state) => ({
     currentPage: state.search.pageNumber,
+    totalPages: state.search.totalPages,
   }));
 
   const dispatch = useAppDispatch();
@@ -22,11 +23,13 @@ function Pagination() {
         disabled={currentPage === 1}
         text="Previous"
       />
-      <span className={styles['page-counter']}>{currentPage}</span>
+      <span className={styles['page-counter']}>
+        {currentPage} of {totalPages}
+      </span>
       <Button
         className={styles['pagination-button']}
         onClick={() => handlePageChange(currentPage! + 1)}
-        // disabled={currentPage === totalPages}
+        disabled={currentPage === totalPages}
         text="Next"
       />
     </div>

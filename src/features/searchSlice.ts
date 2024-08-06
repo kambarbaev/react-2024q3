@@ -16,8 +16,11 @@ const searchSlice = createSlice({
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
     },
+    setTotalPages(state, action: PayloadAction<number>) {
+      state.totalPages = Math.ceil(action.payload / 10);
+    },
   },
 });
 
-export const { setPage, setSearch } = searchSlice.actions;
+export const { setPage, setSearch, setTotalPages } = searchSlice.actions;
 export default searchSlice.reducer;

@@ -19,12 +19,12 @@ function Main({ searchData, loading, currentPage }: MainProps) {
         <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>
       ) : (
         <ul className={styles['list']}>
-          {searchData.length > 0 ? (
-            searchData.map((person) => (
+          {searchData!.length > 0 ? (
+            searchData!.map((person) => (
               <Card
                 key={person.name}
                 person={person}
-                currentPage={currentPage}
+                currentPage={currentPage!}
                 isOpen={openId === getPersonIdFromUrl(person.url)}
                 onCardClick={handleCardClick}
               />
