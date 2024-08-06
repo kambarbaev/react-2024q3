@@ -5,7 +5,7 @@ import { MainProps } from './Main.props';
 import styles from './Main.module.css';
 import { useTheme } from '@hooks/useTheme/useTheme';
 
-function Main({ searchData, loading, currentPage, totalPages, handlePage }: MainProps) {
+function Main({ searchData, loading, currentPage }: MainProps) {
   const { theme } = useTheme();
   const [openId, setOpenId] = useState<string | null>(null);
 
@@ -34,7 +34,7 @@ function Main({ searchData, loading, currentPage, totalPages, handlePage }: Main
           )}
         </ul>
       )}
-      {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePage} />}
+      {<Pagination />}
     </main>
   );
 }

@@ -15,6 +15,7 @@ const mockData = [
 const mockProps: MainProps = {
   searchData: mockData as People[],
   loading: false,
+  isError: false,
   currentPage: 1,
   totalPages: 1,
   handlePage: vi.fn(),

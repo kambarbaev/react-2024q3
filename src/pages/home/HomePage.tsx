@@ -4,14 +4,26 @@ import { Header, Main } from '@components/index';
 import styles from './HomePage.module.css';
 import { useGetPersonsQuery } from '@services/api/newApi';
 import { RootState } from '../../store/store.models';
-import { useAppSelector } from '@hooks/redux';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { useEffect } from 'react';
+import { setPage, setSearch } from '../../features/searchSlice';
 
 function HomePage() {
-  const { page } = useParams<{ keyword: string; page: string }>();
   const { pageNumber, search } = useAppSelector((state: RootState) => state.search);
+  const { page, keyword } = useParams<{ keyword: string; page: string }>();
   const { theme } = useTheme();
+  const dispatch = useAppDispatch();
 
-  const { data, error, isLoading } = useGetPersonsQuery({ pageNumber: page ? +page! : pageNumber, search });
+  useEffect(() => {
+    if (page) {
+      dispatch(setPage(+page));
+    }
+    if (keyword) {
+      dispatch(setSearch(keyword));
+    }
+  }, [page, keyword, dispatch]);
+
+  const { data, error, isLoading } = useGetPersonsQuery({ pageNumber, search });
 
   return (
     <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>

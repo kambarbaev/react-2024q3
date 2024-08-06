@@ -1,21 +1,32 @@
 import { Button } from '@components/index';
-import { PaginationProps } from './Pagination.props';
 import styles from './Pagination.module.css';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { setPage } from '../../features/searchSlice';
 
-function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+function Pagination() {
+  const { currentPage } = useAppSelector((state) => ({
+    currentPage: state.search.pageNumber,
+  }));
+
+  const dispatch = useAppDispatch();
+
+  const handlePageChange = (page: number) => {
+    dispatch(setPage(page));
+  };
+
   return (
     <div className={styles['pagination']}>
       <Button
         className={styles['pagination-button']}
-        onClick={() => onPageChange!(currentPage! - 1)}
+        onClick={() => handlePageChange(currentPage! - 1)}
         disabled={currentPage === 1}
         text="Previous"
       />
       <span className={styles['page-counter']}>{currentPage}</span>
       <Button
         className={styles['pagination-button']}
-        onClick={() => onPageChange!(currentPage! + 1)}
-        disabled={currentPage === totalPages}
+        onClick={() => handlePageChange(currentPage! + 1)}
+        // disabled={currentPage === totalPages}
         text="Next"
       />
     </div>
