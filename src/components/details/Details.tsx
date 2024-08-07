@@ -1,39 +1,23 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchPerson, People } from '@services/index';
+import { People } from '@services/index';
 import styles from './Details.module.css';
 import { useTheme } from '@hooks/useTheme/useTheme';
+import { useGetPersonQuery } from '@services/api/newApi';
 
 function Details() {
-  const [person, setPerson] = useState<People | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
   const { theme } = useTheme();
   const { id } = useParams();
 
-  useEffect(() => {
-    if (id) {
-      const personUrl = `${id}`;
-      fetchPerson(personUrl)
-        .then((data: People) => {
-          setPerson(data);
-          setError(false);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-          setError(true);
-          setLoading(false);
-        });
-    }
-  }, [id]);
+  const { data, isLoading, isError } = useGetPersonQuery(id!);
+
+  const person: People | undefined = data;
 
   return (
     <div className={styles['details']}>
-      {loading ? (
+      {isLoading ? (
         <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>
-      ) : error ? (
-        <div className={`${styles['error']} ${theme === 'light' ? '' : styles['dark']}`}>No available data </div>
+      ) : isError ? (
+        <div className={`${styles['error']} ${theme === 'light' ? '' : styles['dark']}`}>No available data</div>
       ) : (
         person && (
           <div className={styles['description']}>

@@ -1,30 +1,31 @@
-import { useNavigate, useLocation } from 'react-router-dom';
-import { CardProps } from './Card.props';
-import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
-import styles from './Card.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from '@hooks/redux';
 import { useTheme } from '@hooks/useTheme/useTheme';
+import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
+import { CardProps } from './Card.props';
+import { RootState } from '../../store/store.models';
+import styles from './Card.module.css';
 
-function Card({ person, currentPage, isOpen, onCardClick }: CardProps) {
+function Card({ person, isOpen, onCardClick }: CardProps) {
   const { theme } = useTheme();
   const navigate = useNavigate();
-  const location = useLocation();
   const id = getPersonIdFromUrl(person.url);
+  const { pageNumber } = useAppSelector((state: RootState) => state.search);
+  const { keyword } = useParams<{ keyword: string; page: string }>();
 
   const handleClick = () => {
     onCardClick(id, isOpen);
     if (!isOpen) {
-      if (location.pathname.includes('search')) {
-        const keyword = location.pathname.split('/')[2];
-        navigate(`/search/${keyword}/page/${currentPage}/${id}`);
+      if (keyword) {
+        navigate(`/search/${keyword}/page/${pageNumber}/${id}`);
       } else {
-        navigate(`/people/page/${currentPage}/${id}`);
+        navigate(`/people/page/${pageNumber}/${id}`);
       }
     } else {
-      if (location.pathname.includes('search')) {
-        const keyword = location.pathname.split('/')[2];
-        navigate(`/search/${keyword}/page/${currentPage}`);
+      if (keyword) {
+        navigate(`/search/${keyword}/page/${pageNumber}`);
       } else {
-        navigate(`/people/page/${currentPage}`);
+        navigate(`/people/page/${pageNumber}`);
       }
     }
   };

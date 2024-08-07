@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ApiResponse, GetPersonsParams } from './api.props';
+import { ApiResponse, GetPersonsParams, People } from './api.props';
 
 export const peopleApi = createApi({
   reducerPath: 'peopleApi',
@@ -14,7 +14,10 @@ export const peopleApi = createApi({
         },
       }),
     }),
+    getPerson: build.query<People, string>({
+      query: (id) => `people/${id}`,
+    }),
   }),
 });
 
-export const { useGetPersonsQuery } = peopleApi;
+export const { useGetPersonsQuery, useGetPersonQuery } = peopleApi;

@@ -7,7 +7,7 @@ import styles from './Pagination.module.css';
 function Pagination() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { page, keyword } = useParams<{ keyword: string; page: string }>();
+  const { keyword } = useParams<{ keyword: string }>();
   const { currentPage, totalPages } = useAppSelector((state) => ({
     currentPage: state.search.pageNumber,
     totalPages: state.search.totalPages,
