@@ -16,10 +16,9 @@ function Pagination() {
   const handlePageChange = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
     if (keyword) {
-      navigate(`/search/${keyword}/page/${page}`);
-    }
-    if (page && !keyword) {
-      navigate(`/people/page/${page}`);
+      navigate(`/search/${keyword}/page/${pageNumber}`);
+    } else {
+      navigate(`/people/page/${pageNumber}`);
     }
   };
 
