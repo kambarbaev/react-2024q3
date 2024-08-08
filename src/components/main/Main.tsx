@@ -17,7 +17,7 @@ function Main() {
   const { page, keyword } = useParams<{ keyword: string; page: string }>();
   const dispatch = useAppDispatch();
 
-  const { data, isError, isLoading } = useGetPersonsQuery({ pageNumber, search });
+  const { data, isError, isFetching } = useGetPersonsQuery({ pageNumber, search });
 
   const handleCardClick = (id: string, isOpen: boolean) => {
     setOpenId(isOpen ? null : id);
@@ -38,7 +38,7 @@ function Main() {
     }
   }, [data, dispatch]);
 
-  if (isLoading) {
+  if (isFetching) {
     return <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>;
   }
 
