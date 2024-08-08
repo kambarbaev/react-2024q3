@@ -1,39 +1,42 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSearchQuery } from '@hooks/useSearchString/useSearchString';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Button, SearchInput } from '@components/index';
-import { HeaderProps } from './Header.props';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { setPage, setSearch } from '../../features/searchSlice';
 import styles from './Header.module.css';
 
-function Header({ handleSearch, handlePage }: HeaderProps) {
+function Header() {
   const { keyword } = useParams<{ keyword: string }>();
-  const [searchString, setSearchString] = useSearchQuery();
-  const [inputValue, setInputValue] = useState<string>(keyword || searchString || '');
+  const dispatch = useAppDispatch();
+  const { search } = useAppSelector((state) => state.search);
+  const [inputValue, setInputValue] = useState<string>(keyword || search || '');
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
-
   const buttonText = theme === 'light' ? 'Dark' : 'Light';
 
   useEffect(() => {
     if (keyword) {
       setInputValue(keyword);
-      setSearchString(keyword);
+      dispatch(setSearch(keyword));
     }
-  }, [keyword, setSearchString]);
+  }, [keyword, dispatch]);
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
-    setSearchString(value);
   };
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    handleSearch(inputValue, 1);
-    handlePage!(1);
-    if (inputValue.trim()) {
-      navigate(`/search/${encodeURIComponent(inputValue.trim())}/page/1`);
+    const trimmedValue = inputValue.trim();
+
+    if (trimmedValue) {
+      dispatch(setSearch(trimmedValue));
+      dispatch(setPage(1));
+      navigate(`/search/${encodeURIComponent(trimmedValue)}/page/1`);
     } else {
+      dispatch(setSearch(''));
+      dispatch(setPage(1));
       navigate(`/people/page/1`);
     }
   };
@@ -44,7 +47,7 @@ function Header({ handleSearch, handlePage }: HeaderProps) {
         <img src="/logotype.png" />
       </div>
       <form className={styles['form']} onSubmit={handleSubmit}>
-        <SearchInput value={searchString} onChange={handleInputChange} />
+        <SearchInput value={inputValue} onChange={handleInputChange} />
         <Button text="Search" />
       </form>
       <Button text={buttonText} onClick={toggleTheme} />

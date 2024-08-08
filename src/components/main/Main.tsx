@@ -38,12 +38,16 @@ function Main() {
     }
   }, [data, dispatch]);
 
+  if (isLoading) {
+    return <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div className={`${styles['no-data']} ${theme === 'light' ? '' : styles['dark']}`}>No available data</div>;
+  }
+
   return (
     <main className={styles['main']}>
-      {isLoading && <div className={`${styles['loading']} ${theme === 'light' ? '' : styles['dark']}`}>Loading...</div>}
-      {isError && (
-        <div className={`${styles['no-data']} ${theme === 'light' ? '' : styles['dark']}`}>No available data</div>
-      )}
       {data && data.results && data.results.length > 0 && (
         <ul className={styles['list']}>
           {data.results.map((person) => (

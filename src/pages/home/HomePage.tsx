@@ -6,6 +6,8 @@ import styles from './HomePage.module.css';
 function HomePage() {
   const { theme } = useTheme();
 
+  
+
   return (
     <div className={`${styles['homepage']} ${theme === 'light' ? '' : styles['dark']}`}>
       <div className={styles['container']}>
