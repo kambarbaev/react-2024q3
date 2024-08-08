@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { peopleApi } from '@services/index';
-import searchSlice from '../features/searchSlice';
+import searchSlice from '@features/search/searchSlice';
 
 export const rootReducer = combineReducers({
   [peopleApi.reducerPath]: peopleApi.reducer,

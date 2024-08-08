@@ -2,8 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '@hooks/redux';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
+import { RootState } from '@store/store.models';
 import { CardProps } from './Card.props';
-import { RootState } from '../../store/store.models';
 import styles from './Card.module.css';
 
 function Card({ person, isOpen, onCardClick }: CardProps) {
@@ -32,6 +32,7 @@ function Card({ person, isOpen, onCardClick }: CardProps) {
 
   return (
     <li className={`${styles['card']} ${theme === 'light' ? '' : styles['dark']}`} onClick={handleClick}>
+      <input type="checkbox" className={styles['checkbox']} readOnly />
       <h2 className={`${styles['name']} ${theme === 'light' ? '' : styles['dark']}`}>{person.name}</h2>
     </li>
   );

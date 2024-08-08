@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from '@hooks/useTheme/useTheme';
 import { Button, SearchInput } from '@components/index';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
-import { setPage, setSearch } from '../../features/searchSlice';
 import styles from './Header.module.css';
+import { setPage, setSearch } from '@features/index';
 
 function Header() {
   const { keyword } = useParams<{ keyword: string }>();

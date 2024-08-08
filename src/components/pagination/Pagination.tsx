@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
-import { setPage } from '../../features/searchSlice';
 import { Button } from '@components/index';
 import styles from './Pagination.module.css';
+import { setPage } from '@features/index';
 
 function Pagination() {
   const dispatch = useAppDispatch();

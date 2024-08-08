@@ -32,7 +32,9 @@
       "@hooks/*": ["./src/hooks/*"],
       "@router/*": ["./src/router/*"],
       "@utils/*": ["./src/utils/*"],
-      "@context/*": ["./src/context/*"]
+      "@context/*": ["./src/context/*"],
+      "@store/*": ["./src/store/*"],
+      "@features/*": ["./src/features/*"]
     }
   },
   "include": ["src"]
