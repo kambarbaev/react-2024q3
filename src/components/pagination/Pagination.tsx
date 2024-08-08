@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { selectPagination, useAppDispatch, useAppSelector } from '@hooks/redux';
 import { Button } from '@components/index';
 import styles from './Pagination.module.css';
 import { setPage } from '@features/index';
@@ -8,10 +8,7 @@ function Pagination() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { keyword } = useParams<{ keyword: string }>();
-  const { currentPage, totalPages } = useAppSelector((state) => ({
-    currentPage: state.search.pageNumber,
-    totalPages: state.search.totalPages,
-  }));
+  const { currentPage, totalPages } = useAppSelector(selectPagination);
 
   const handlePageChange = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
