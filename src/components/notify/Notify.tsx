@@ -1,5 +1,6 @@
 import { removeAllCards } from '@features/index';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { createCvsFile } from '@utils/createCvsFile';
 
 function Notify() {
   const { selectedCard } = useAppSelector((state) => state.card);
@@ -10,6 +11,10 @@ function Notify() {
     dispatch(removeAllCards());
   };
 
+  const handleDownload = () => {
+    createCvsFile(selectedCard!);
+  };
+
   console.log(selectedCard);
   return (
     <div>
@@ -17,7 +22,7 @@ function Notify() {
         <div>
           <h2>Selected Cards {selectedCard.length}</h2>
           <button onClick={handleUnselectAll}>Unselect all</button>
-          <button>Download CSV</button>
+          <button onClick={handleDownload}>Download CSV</button>
         </div>
       )}
     </div>
