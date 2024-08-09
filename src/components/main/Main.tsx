@@ -4,7 +4,7 @@ import { useTheme } from '@hooks/useTheme/useTheme';
 import { RootState } from '@store/store.models';
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { setPage, setSearch, setTotalPages } from '@features/index';
-import { Card, Notify, Pagination } from '@components/index';
+import { Card, Pagination } from '@components/index';
 import { getPersonIdFromUrl } from '@utils/getPersonIdFromUrl';
 import { useGetPersonsQuery } from '@services/api/newApi';
 import styles from './Main.module.css';
@@ -47,7 +47,6 @@ function Main() {
 
   return (
     <main className={styles['main']}>
-      <Notify />
       {data && data.results && data.results.length > 0 && (
         <ul className={styles['list']}>
           {data.results.map((person) => (

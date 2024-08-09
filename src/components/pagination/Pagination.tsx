@@ -21,21 +21,11 @@ function Pagination() {
 
   return (
     <div className={styles['pagination']}>
-      <Button
-        className={styles['pagination-button']}
-        onClick={() => handlePageChange(currentPage! - 1)}
-        disabled={currentPage === 1}
-        text="Previous"
-      />
+      <Button onClick={() => handlePageChange(currentPage! - 1)} disabled={currentPage === 1} text="Previous" />
       <span className={styles['page-counter']}>
         {currentPage} of {totalPages}
       </span>
-      <Button
-        className={styles['pagination-button']}
-        onClick={() => handlePageChange(currentPage! + 1)}
-        disabled={currentPage === totalPages}
-        text="Next"
-      />
+      <Button onClick={() => handlePageChange(currentPage! + 1)} disabled={currentPage === totalPages} text="Next" />
     </div>
   );
 }
