@@ -12,15 +12,17 @@ const cardSlice = createSlice({
   reducers: {
     addCard(state, action: PayloadAction<People>) {
       if (!state.selectedCard!.includes(action.payload)) {
-        console.log('addCard', action.payload);
         state.selectedCard!.push(action.payload);
       }
     },
     removeCard(state, action: PayloadAction<People>) {
       state.selectedCard = state.selectedCard!.filter((card) => card.url !== action.payload.url);
     },
+    removeAllCards(state) {
+      state.selectedCard = [];
+    },
   },
 });
 
-export const { addCard, removeCard } = cardSlice.actions;
+export const { addCard, removeCard, removeAllCards } = cardSlice.actions;
 export default cardSlice.reducer;
