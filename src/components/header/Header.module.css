@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: var(--light-block-bg-color);
+  border-radius: 2px;
+  padding: 20px;
+  gap: 10px;
+
+  &.dark {
+    background-color: #141414;
+  }
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}

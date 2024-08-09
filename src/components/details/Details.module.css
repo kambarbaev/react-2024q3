@@ -1,0 +1,40 @@
+.details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading,
+.error {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: var(--light-text-color);
+
+  &.dark {
+    color: #f8b600;
+  }
+}
+
+.description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #f8b600;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+
+  & span {
+    color: #f8b600;
+  }
+}

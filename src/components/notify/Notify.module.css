@@ -1,0 +1,22 @@
+.notify {
+  background-color: var(--light-block-bg-color);
+  padding: 10px 20px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #161616;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  grid-area: 1 / 1 / 2 / 3;
+}
