@@ -1,0 +1,12 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --light-block-bg-color: #e2e6e9;
+  --light-text-color: #27282f;
+}
+
+body {
+  margin: 0;
+}
